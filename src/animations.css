@@ -1,0 +1,263 @@
+/* ═══════════════════════════════════════════════════════
+   BUSINESIT — ADVANCED ANIMATION SYSTEM
+   Import this once in App.css or main.jsx
+   Works alongside existing cursor FX — no conflicts
+═══════════════════════════════════════════════════════ */
+
+/* ── 1. CUSTOM CURSOR RING ── */
+.cur-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(200,241,53,.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99990;
+  left: 0; top: 0;
+  transform: translate(-50%,-50%);
+  transition: width .25s ease, height .25s ease,
+              border-color .25s ease, background .25s ease,
+              opacity .25s ease;
+  will-change: transform;
+}
+.cur-ring.is-hover {
+  width: 56px; height: 56px;
+  border-color: rgba(200,241,53,.9);
+  background: rgba(200,241,53,.06);
+}
+.cur-ring.is-click {
+  width: 18px; height: 18px;
+  border-color: #fff;
+  background: rgba(255,255,255,.12);
+}
+.cur-dot {
+  position: fixed;
+  width: 5px; height: 5px;
+  background: #c8f135;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99991;
+  left: 0; top: 0;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 0 10px #c8f135, 0 0 20px rgba(200,241,53,.4);
+  will-change: transform;
+}
+
+/* ── 2. MAGNETIC BUTTON WRAP ── */
+.mag-wrap {
+  display: inline-flex;
+  will-change: transform;
+}
+
+/* ── 3. TILT CARD ── */
+.tilt-card {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+.tilt-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity .3s ease;
+  background: radial-gradient(
+    circle at var(--mx,50%) var(--my,50%),
+    rgba(255,255,255,.07) 0%,
+    transparent 60%
+  );
+}
+.tilt-card:hover .tilt-shine { opacity: 1; }
+
+/* ── 4. RIPPLE on click ── */
+.ripple-host { position: relative; overflow: hidden; }
+@keyframes rippleOut {
+  to { transform: scale(5); opacity: 0; }
+}
+.ripple-el {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(200,241,53,.2);
+  animation: rippleOut .65s ease-out forwards;
+  pointer-events: none;
+  transform: scale(0);
+}
+
+/* ── 5. TEXT SCRAMBLE placeholder ── */
+.scramble-el { display: inline-block; }
+
+/* ── 6. FLOATING BADGE animation ── */
+@keyframes floatBadge {
+  0%,100% { transform: translateY(0px) rotate(0deg); }
+  33%     { transform: translateY(-8px) rotate(.5deg); }
+  66%     { transform: translateY(-4px) rotate(-.5deg); }
+}
+.float-badge { animation: floatBadge 5s ease-in-out infinite; }
+.float-badge-slow { animation: floatBadge 7s ease-in-out infinite 1s; }
+
+/* ── 7. GRADIENT SHIMMER TEXT ── */
+.shimmer-text {
+  background: linear-gradient(
+    100deg,
+    #c8f135 0%,
+    #fff    35%,
+    #a78bfa 55%,
+    #c8f135 100%
+  );
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerMove 5s linear infinite;
+}
+@keyframes shimmerMove { to { background-position: 250% center; } }
+
+/* ── 8. BORDER BEAM on CTA cards ── */
+@property --ba { syntax:'<angle>'; initial-value:0deg; inherits:false; }
+.border-beam {
+  position: relative;
+  overflow: hidden;
+}
+.border-beam::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--ba),
+    transparent 0deg,
+    rgba(200,241,53,.55) 60deg,
+    transparent 120deg
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1px;
+  animation: beamSpin 4s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes beamSpin { to { --ba: 360deg; } }
+
+/* ── 9. SPOTLIGHT FOLLOW on dark sections ── */
+.spotlight-host {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight-host::before {
+  content: '';
+  position: absolute;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(124,92,252,.1) 0%,
+    transparent 65%
+  );
+  left: var(--slx, -300px);
+  top:  var(--sly, -300px);
+  transform: translate(-50%,-50%);
+  pointer-events: none;
+  transition: left .1s ease, top .1s ease;
+  z-index: 0;
+}
+
+/* ── 10. COUNT-UP numbers ── */
+.countup-num { display: inline-block; }
+
+/* ── 11. TYPEWRITER cursor ── */
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px; height: 1em;
+  background: var(--lime,#c8f135);
+  margin-left: 3px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+/* ── 12. PARTICLE TRAIL (canvas, behind everything) ── */
+#trail-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99989;
+}
+
+/* ── 13. SCROLL PROGRESS BAR ── */
+#scroll-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7c5cfc, #c8f135);
+  z-index: 99992;
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 0 0 8px rgba(200,241,53,.5);
+}
+
+/* ── 14. GLOW HOVER on stat boxes, cards ── */
+.glow-hover {
+  transition: box-shadow .35s ease, transform .35s ease, border-color .35s ease;
+}
+.glow-hover:hover {
+  box-shadow: 0 0 0 1px rgba(200,241,53,.25),
+              0 0 28px rgba(200,241,53,.12),
+              0 16px 48px rgba(0,0,0,.45);
+  transform: translateY(-5px);
+  border-color: rgba(200,241,53,.2) !important;
+}
+
+/* ── 15. NOISE OVERLAY flicker (subtle) ── */
+@keyframes noiseShift {
+  0%   { background-position: 0 0; }
+  25%  { background-position: 10% 10%; }
+  50%  { background-position: 0 20%; }
+  75%  { background-position: -10% 10%; }
+  100% { background-position: 0 0; }
+}
+.noise-flicker::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: .5;
+  animation: noiseShift 8s steps(1) infinite;
+  z-index: 1;
+}
+
+/* ── 16. REVEAL on scroll (CSS only fallback) ── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1);
+}
+.reveal-up.in-view {
+  opacity: 1;
+  transform: none;
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22,1,.36,1);
+}
+.reveal-left.in-view { opacity: 1; transform: none; }
+
+/* ── 17. STAGGER GRID children ── */
+.stagger-grid > * {
+  opacity: 0;
+  transform: translateY(24px);
+}
+.stagger-grid.in-view > *:nth-child(1) { animation: staggerUp .5s .04s ease forwards; }
+.stagger-grid.in-view > *:nth-child(2) { animation: staggerUp .5s .10s ease forwards; }
+.stagger-grid.in-view > *:nth-child(3) { animation: staggerUp .5s .16s ease forwards; }
+.stagger-grid.in-view > *:nth-child(4) { animation: staggerUp .5s .22s ease forwards; }
+.stagger-grid.in-view > *:nth-child(5) { animation: staggerUp .5s .28s ease forwards; }
+.stagger-grid.in-view > *:nth-child(6) { animation: staggerUp .5s .34s ease forwards; }
+@keyframes staggerUp { to { opacity:1; transform:none; } }
