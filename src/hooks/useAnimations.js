@@ -1,8 +1,4 @@
-/**
- * useAnimations — Master animation hook for BusinesIT
- * Call ONCE inside App.jsx:  useAnimations();
- * Does NOT touch the existing cursor flame/spark system.
- */
+
 import { useEffect } from 'react';
 
 /* ── small helpers ── */

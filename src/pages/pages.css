@@ -1,6 +1,4 @@
-/* ═══════════════════════════════════════════
-   FX LAYER
-═══════════════════════════════════════════ */
+
 .fx-layer{position:fixed;inset:0;pointer-events:none;z-index:99999;overflow:hidden;}
 .fx-ember{position:absolute;border-radius:50% 50% 40% 40%;pointer-events:none;transform-origin:center bottom;animation:emberRise var(--dur,.6s) ease-out forwards;}
 @keyframes emberRise{

@@ -1,10 +1,4 @@
-/* ═══════════════════════════════════════════════════════
-   BUSINESIT — ADVANCED ANIMATION SYSTEM
-   Import this once in App.css or main.jsx
-   Works alongside existing cursor FX — no conflicts
-═══════════════════════════════════════════════════════ */
 
-/* ── 1. CUSTOM CURSOR RING ── */
 .cur-ring {
   position: fixed;
   width: 36px; height: 36px;
