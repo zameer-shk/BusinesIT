@@ -13,7 +13,8 @@ export default function Footer() {
             <p className="footer__tagline">We design and build professional websites for businesses across India — beautiful, fast, and built to grow.</p>
             <div className="footer__socials">
               <a href="https://linkedin.com"          target="_blank" rel="noopener noreferrer" className="footer__social-btn">in</a>
-              <a href="https://instagram.com"         target="_blank" rel="noopener noreferrer" className="footer__social-btn">ig</a>
+              {/* <a href="https://instagram.com"         target="_blank" rel="noopener noreferrer" className="footer__social-btn">ig</a> */}
+              <a href="https://www.instagram.com/businesit.in/" target="_blank" rel="noopener noreferrer" className="footer__social-btn">ig</a>
               <a href="https://wa.me/919028747098"    target="_blank" rel="noopener noreferrer" className="footer__social-btn">wa</a>
             </div>
           </div>
